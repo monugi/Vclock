@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="theme-color" content="#0090DD" />
+    <meta name="msapplication-TileColor" content="#0090DD" />
+    
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    
+    <!-- Google Analytics 4 - Performance Optimized -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-21XPGE7YTS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-21XPGE7YTS', {
+        page_title: document.title,
+        page_location: window.location.href,
+        send_page_view: false // We'll send this manually after page load
+      });
+      
+      // Performance optimization: Send pageview after page is fully loaded
+      window.addEventListener('load', function() {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_referrer: document.referrer
+        });
+      });
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => console.log('SW registered'))
+            .catch(error => console.log('SW registration failed'));
+        });
+      }
+    </script>
+    
+    <link rel="preload" href="/assets/Nunito-VariableFont_wght-DjOotFkD.ttf" as="font" type="font/ttf" crossorigin>
+    <title>VClock - Free Online Alarm Clock, Timer, Stopwatch & World Clock</title>
+    <!-- Preload main CSS for faster rendering -->
+    <link rel="preload" href="/assets/index.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/index.css"></noscript>
+    <script type="module" crossorigin src="/assets/index-BcinQU9R.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-Z2Iecplj.js">
+    <link rel="modulepreload" crossorigin href="/assets/router-DbNfhCZx.js">
+    <link rel="modulepreload" crossorigin href="/assets/icons-C2dKsfne.js">
+    <link rel="modulepreload" crossorigin href="/assets/helmet-DUQA423H.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-r7wWwWdI.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

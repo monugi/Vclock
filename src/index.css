@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile Performance Optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Enable text selection for specific elements */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Allow text selection for timer, alarm, and stopwatch display values */
+.timer-display, .alarm-time-display, .stopwatch-display, .selectable-text {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Keep original fonts */
+@font-face {
+  font-family: 'Digital-7';
+  src: url('/fonts/digital-7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-digital {
+  font-family: 'Digital-7', clockicons, sans-serif;
+}
+
+@font-face {
+  font-family: 'Seven Segment';
+  src: url('/fonts/Seven Segment.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-seven-segment {
+  font-family: 'Seven Segment', clockicons, sans-serif;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+}
+
+/* Base styles with performance optimizations */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Mobile optimizations */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Removed overscroll-behavior and -webkit-overflow-scrolling to fix mobile blank page issue */
+  }
+  
+  /* Mobile touch optimizations */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Dark mode optimizations */
+  html.dark, .dark body, .dark, .dark * {
+    color: #fff !important;
+  }
+  
+  html.dark, .dark body {
+    background-color: #000 !important;
+  }
+  
+  .dark .bg-white,
+  .dark .bg-gray-50,
+  .dark .bg-gray-100,
+  .dark .bg-gray-200,
+  .dark .bg-gray-800,
+  .dark .bg-gray-900 {
+    background-color: #000 !important;
+  }
+  
+  .dark .text-black {
+    color: #fff !important;
+  }
+  
+  .dark .text-gray-600 {
+    color: #ccc !important;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .loading-spinner {
+    @apply animate-spin rounded-full border-b-2 border-blue-500;
+  }
+  
+  /* Mobile-optimized buttons */
+  .btn-mobile {
+    @apply min-h-[44px] min-w-[44px];
+    touch-action: manipulation;
+  }
+  
+  /* Reduce animations on mobile for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Utility styles */
+@layer utilities {
+  @keyframes alarm-modal-in {
+    0% { 
+      opacity: 0; 
+      transform: scale(0.95); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+  }
+  
+  .animate-alarm-modal-in {
+    animation: alarm-modal-in 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  /* Responsive text utilities */
+  .text-responsive-xs { 
+    font-size: clamp(0.75rem, 2vw, 0.875rem); 
+  }
+  
+  .text-responsive-sm { 
+    font-size: clamp(0.875rem, 2.5vw, 1rem); 
+  }
+  
+  .text-responsive-base { 
+    font-size: clamp(1rem, 3vw, 1.125rem); 
+  }
+  
+  .text-responsive-lg { 
+    font-size: clamp(1.125rem, 3.5vw, 1.25rem); 
+  }
+  
+  .text-responsive-xl { 
+    font-size: clamp(1.25rem, 4vw, 1.5rem); 
+  }
+  
+  .text-responsive-2xl { 
+    font-size: clamp(1.5rem, 5vw, 2rem); 
+  }
+  
+  .text-responsive-3xl { 
+    font-size: clamp(2rem, 6vw, 3rem); 
+  }
+  
+  /* Mobile-specific utilities */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+body, html {
+  background: var(--bg);
+  color: var(--text);
+  /* Remove font-family and color-scheme overrides */
+}
+.bg-accent { background: var(--accent); }
+.text-accent { color: var(--accent); }
